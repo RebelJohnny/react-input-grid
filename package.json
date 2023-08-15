@@ -1,7 +1,18 @@
 {
+    "scripts": {
+        "build": "babel ./src -d ./dist && npx copyfiles -f ./src/*.css ./dist"
+      },
     "name": "react-input-grid",
     "version": "1.0.0",
-    "main": "dist/index.js",
+    "main": "dist/GHGrid.js",
+  "exports": {
+    ".": "./dist/GHGrid.js",
+    "./InputGridAutoComplete": "./dist/Components/InputGridAutoComplete",
+    "./InputGridCurrencyInput": "./dist/Components/InputGridCurrencyInput",
+    "./InputGridDatepicker": "./dist/Components/InputGridDatepicker",
+    "./InputGridDeleteRowBtn": "./dist/Components/InputGridDeleteRowBtn",
+    "./InputGridInput": "./dist/Components/InputGridInput"
+  },
     "devDependencies": {
       "@babel/cli": "^7.22.10",
       "@babel/core": "^7.22.10",
