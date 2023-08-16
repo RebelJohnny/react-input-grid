@@ -156,4 +156,4 @@ export {default as InputGridAutoComplete} from "./components/InputGridAutoComple
 export {default as InputGridCurrencyInput} from "./components/InputGridCurrencyInput"
 export {default as InputGridDatepicker} from "./components/InputGridDatepicker"
 export {default as InputGridInput} from "./components/InputGridInput"
-export {default as KeyboardNavigation} from "./utils/gridNavigation"
+export {KeyDownHandler as KeyboardNavigation} from "./utils/gridNavigation"
