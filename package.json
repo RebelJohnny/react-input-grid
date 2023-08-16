@@ -3,16 +3,16 @@
         "build": "babel ./src -d ./dist && npx copyfiles -f ./src/*.css ./dist && npx copyfiles -f ./src/assets/fonts/*.woff ./dist/assets/fonts && npx copyfiles -f ./src/assets/fonts/*.woff2 ./dist/assets/fonts"
       },
     "name": "react-input-grid",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "main": "dist/GHGrid.js",
   "exports": {
     ".": "./dist/GHGrid.js",
-    "./Components/InputGridAutoComplete": "./dist/Components/InputGridAutoComplete",
-    "./Components/InputGridCurrencyInput": "./dist/Components/InputGridCurrencyInput",
-    "./Components/InputGridDatepicker": "./dist/Components/InputGridDatepicker",
-    "./Components/InputGridDeleteRowBtn": "./dist/Components/InputGridDeleteRowBtn",
-    "./Components/InputGridInput": "./dist/Components/InputGridInput",
-    "./Functions/Navigation": "./dist/utils/gridNavigation"
+    "./InputGridAutoComplete": "./dist/Components/InputGridAutoComplete",
+    "./InputGridCurrencyInput": "./dist/Components/InputGridCurrencyInput",
+    "./InputGridDatepicker": "./dist/Components/InputGridDatepicker",
+    "./InputGridDeleteRowBtn": "./dist/Components/InputGridDeleteRowBtn",
+    "./InputGridInput": "./dist/Components/InputGridInput",
+    "./Navigation": "./dist/utils/gridNavigation"
   },
     "devDependencies": {
       "@babel/cli": "^7.22.10",
