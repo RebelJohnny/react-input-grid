@@ -1,6 +1,6 @@
 import CurrencyInput from "react-currency-input-field"
 
-const InputGridCurrencyInput = (props) => {
+export default function InputGridCurrencyInput(props) {
     return (
         <CurrencyInput
             className={`form-input`}
@@ -10,4 +10,3 @@ const InputGridCurrencyInput = (props) => {
         />
     )
 }
-export default InputGridCurrencyInput

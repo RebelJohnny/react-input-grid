@@ -9,7 +9,7 @@ import { useTheme } from "@mui/material";
 import { CreateTableError } from "./utils/createTableError";
 import { findNextFocusable } from "./utils/gridNavigation";
 
-const GHGrid = ({
+export default function GHGrid ({
     title,
     fieldArrayName,
     fieldArrayKey,
@@ -24,7 +24,7 @@ const GHGrid = ({
     showFooter = "true",
     showDelete = "true",
     showAddButton = "true",
-    customUpperButtonFunction }) => {
+    customUpperButtonFunction }) {
     const { t, i18n } = useTranslation()
     const theme = useTheme();
     return (
@@ -150,4 +150,3 @@ const GHGrid = ({
         </>
     )
 }
-export default GHGrid

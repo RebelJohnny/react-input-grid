@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = void 0;
+exports["default"] = GHGrid;
 var _Button = _interopRequireDefault(require("@mui/material/Button"));
 var _Add = _interopRequireDefault(require("@mui/icons-material/Add"));
 require("./style.css");
@@ -15,7 +15,7 @@ var _material = require("@mui/material");
 var _createTableError = require("./utils/createTableError");
 var _gridNavigation = require("./utils/gridNavigation");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-var GHGrid = function GHGrid(_ref) {
+function GHGrid(_ref) {
   var title = _ref.title,
     fieldArrayName = _ref.fieldArrayName,
     fieldArrayKey = _ref.fieldArrayKey,
@@ -132,6 +132,4 @@ var GHGrid = function GHGrid(_ref) {
       key: index
     }, error ? " ".concat(t("ردیف"), " ").concat(index + 1, " : ").concat((0, _createTableError.CreateTableError)(error)) : null);
   }))));
-};
-var _default = GHGrid;
-exports["default"] = _default;
+}

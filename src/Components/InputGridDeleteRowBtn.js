@@ -1,7 +1,7 @@
 import { IconButton } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const InputGridDeleteRowBtn = (props) => {
+export default function InputGridDeleteRowBtn (props) {
     return (
         <IconButton
             variant="contained"
@@ -13,5 +13,3 @@ const InputGridDeleteRowBtn = (props) => {
         </IconButton>
     )
 }
-
-export default InputGridDeleteRowBtn

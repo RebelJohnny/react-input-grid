@@ -3,13 +3,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = void 0;
+exports["default"] = InputGridDatepicker;
 var _reactMultiDatePicker = _interopRequireDefault(require("react-multi-date-picker"));
 var _reactI18next = require("react-i18next");
 var _calendarLang = require("../utils/calendarLang");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-var InputGridDatepicker = function InputGridDatepicker(props) {
+function InputGridDatepicker(props) {
   var _useTranslation = (0, _reactI18next.useTranslation)(),
     t = _useTranslation.t,
     i18n = _useTranslation.i18n;
@@ -20,6 +20,4 @@ var InputGridDatepicker = function InputGridDatepicker(props) {
     onOpen: false,
     onOpenPickNewDate: false
   }, props));
-};
-var _default = InputGridDatepicker;
-exports["default"] = _default;
+}

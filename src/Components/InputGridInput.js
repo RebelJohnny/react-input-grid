@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-const InputGridInput = ({ inputType = "text", ...props }) => {
+export default function InputGridInput ({ inputType = "text", ...props }) {
     const [type, setType] = useState(inputType)
     return (
         <input
@@ -11,4 +11,3 @@ const InputGridInput = ({ inputType = "text", ...props }) => {
         />
     )
 }
-export default InputGridInput

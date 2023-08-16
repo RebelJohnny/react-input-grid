@@ -3,13 +3,13 @@ import Autocomplete from "@mui/material/Autocomplete"
 import CircularProgress from "@mui/material/CircularProgress"
 import { useState } from "react"
 
-const InputGridAutoComplete = ({
+export default function InputGridAutoComplete ({
     innerWidth = 300,
     innerFontSize = '12px',
     backgroundColor = '#FFFFFF',
     loadingState,
     ...props
-}) => {
+}) {
     const { t, i18n } = useTranslation()
     const [width, setWidth] = useState(innerWidth)
     const [fontSize, setFontSize] = useState(innerFontSize)
@@ -53,4 +53,3 @@ const InputGridAutoComplete = ({
         />
     )
 }
-export default InputGridAutoComplete

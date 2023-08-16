@@ -2,7 +2,7 @@ import DatePicker from "react-multi-date-picker";
 import { useTranslation } from "react-i18next";
 import { renderCalendarLocaleSwitch, renderCalendarSwitch } from "../utils/calendarLang";
 
-const InputGridDatepicker = (props) => {
+export default function InputGridDatepicker (props) {
     const {t, i18n} = useTranslation()
     return (
         <DatePicker
@@ -15,4 +15,3 @@ const InputGridDatepicker = (props) => {
         />
     )
 }
-export default InputGridDatepicker
