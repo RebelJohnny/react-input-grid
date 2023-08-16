@@ -7,12 +7,13 @@ exports["default"] = void 0;
 var _Button = _interopRequireDefault(require("@mui/material/Button"));
 var _Add = _interopRequireDefault(require("@mui/icons-material/Add"));
 require("./style.css");
-var _gridKeyboardNav = require("../../utils/gridKeyboardNav3");
 var _reactI18next = require("react-i18next");
 var _formik = require("formik");
 var _react = _interopRequireDefault(require("react"));
-var _InputGridDeleteRowBtn = _interopRequireDefault(require("./InputGridDeleteRowBtn"));
+var _InputGridDeleteRowBtn = _interopRequireDefault(require("./components/InputGridDeleteRowBtn"));
 var _material = require("@mui/material");
+var _createTableError = require("./utils/createTableError");
+var _gridNavigation = require("./utils/gridNavigation");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 var GHGrid = function GHGrid(_ref) {
   var title = _ref.title,
@@ -57,7 +58,7 @@ var GHGrid = function GHGrid(_ref) {
       setTimeout(function () {
         var added = e.target.closest("div").parentElement.nextSibling.querySelector('tbody tr:last-child td:nth-child(2)');
         while (added.querySelector("button:not([aria-label='Clear'])") || added.querySelector("input").disabled) {
-          added = (0, _gridKeyboardNav.findNextFocusable)(added);
+          added = (0, _gridNavigation.findNextFocusable)(added);
         }
         added.querySelector("input").focus();
       }, 0);
@@ -129,7 +130,7 @@ var GHGrid = function GHGrid(_ref) {
     return /*#__PURE__*/_react["default"].createElement("p", {
       className: "error-msg",
       key: index
-    }, error ? " ".concat(t("ردیف"), " ").concat(index + 1, " : ").concat((0, _gridKeyboardNav.CreateTableError)(error)) : null);
+    }, error ? " ".concat(t("ردیف"), " ").concat(index + 1, " : ").concat((0, _createTableError.CreateTableError)(error)) : null);
   }))));
 };
 var _default = GHGrid;

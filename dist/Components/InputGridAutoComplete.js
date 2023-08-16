@@ -8,7 +8,6 @@ var _reactI18next = require("react-i18next");
 var _Autocomplete = _interopRequireDefault(require("@mui/material/Autocomplete"));
 var _CircularProgress = _interopRequireDefault(require("@mui/material/CircularProgress"));
 var _react = require("react");
-require("../style.css");
 var _excluded = ["innerWidth", "innerFontSize", "backgroundColor", "loadingState"];
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -24,9 +23,9 @@ var InputGridAutoComplete = function InputGridAutoComplete(_ref) {
   var _ref$innerWidth = _ref.innerWidth,
     innerWidth = _ref$innerWidth === void 0 ? 300 : _ref$innerWidth,
     _ref$innerFontSize = _ref.innerFontSize,
-    innerFontSize = _ref$innerFontSize === void 0 ? "12px" : _ref$innerFontSize,
+    innerFontSize = _ref$innerFontSize === void 0 ? '12px' : _ref$innerFontSize,
     _ref$backgroundColor = _ref.backgroundColor,
-    backgroundColor = _ref$backgroundColor === void 0 ? "#FFFFFF" : _ref$backgroundColor,
+    backgroundColor = _ref$backgroundColor === void 0 ? '#FFFFFF' : _ref$backgroundColor,
     loadingState = _ref.loadingState,
     props = _objectWithoutProperties(_ref, _excluded);
   var _useTranslation = (0, _reactI18next.useTranslation)(),
@@ -51,7 +50,7 @@ var InputGridAutoComplete = function InputGridAutoComplete(_ref) {
           width: {
             width: width
           },
-          maxWidth: "90vw",
+          maxWidth: '90vw',
           direction: i18n.dir(),
           position: "absolute",
           fontSize: {
