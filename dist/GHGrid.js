@@ -35,12 +35,12 @@ Object.defineProperty(exports, "KeyboardNavigation", {
   }
 });
 exports["default"] = void 0;
+var _react = _interopRequireDefault(require("react"));
 var _Button = _interopRequireDefault(require("@mui/material/Button"));
 var _Add = _interopRequireDefault(require("@mui/icons-material/Add"));
 require("./style.css");
 var _reactI18next = require("react-i18next");
 var _formik = require("formik");
-var _react = _interopRequireDefault(require("react"));
 var _InputGridDeleteRowBtn = _interopRequireDefault(require("./components/InputGridDeleteRowBtn"));
 var _material = require("@mui/material");
 var _createTableError = require("./utils/createTableError");

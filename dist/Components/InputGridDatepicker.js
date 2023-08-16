@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = InputGridDatepicker;
+var _react = _interopRequireDefault(require("react"));
 var _reactMultiDatePicker = _interopRequireDefault(require("react-multi-date-picker"));
 var _reactI18next = require("react-i18next");
 var _calendarLang = require("../utils/calendarLang");
@@ -13,7 +14,7 @@ function InputGridDatepicker(props) {
   var _useTranslation = (0, _reactI18next.useTranslation)(),
     t = _useTranslation.t,
     i18n = _useTranslation.i18n;
-  return /*#__PURE__*/React.createElement(_reactMultiDatePicker["default"], _extends({
+  return /*#__PURE__*/_react["default"].createElement(_reactMultiDatePicker["default"], _extends({
     calendar: (0, _calendarLang.renderCalendarSwitch)(i18n.language),
     locale: (0, _calendarLang.renderCalendarLocaleSwitch)(i18n.language),
     calendarPosition: "bottom-right",

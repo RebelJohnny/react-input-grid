@@ -1,3 +1,5 @@
+import React from 'react';
+
 import CurrencyInput from "react-currency-input-field"
 
 export default function InputGridCurrencyInput(props) {
