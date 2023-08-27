@@ -3,51 +3,17 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-Object.defineProperty(exports, "InputGridAutoComplete", {
-  enumerable: true,
-  get: function get() {
-    return _InputGridAutoComplete["default"];
-  }
-});
-Object.defineProperty(exports, "InputGridCurrencyInput", {
-  enumerable: true,
-  get: function get() {
-    return _InputGridCurrencyInput["default"];
-  }
-});
-Object.defineProperty(exports, "InputGridDatepicker", {
-  enumerable: true,
-  get: function get() {
-    return _InputGridDatepicker["default"];
-  }
-});
-Object.defineProperty(exports, "InputGridInput", {
-  enumerable: true,
-  get: function get() {
-    return _InputGridInput["default"];
-  }
-});
-Object.defineProperty(exports, "KeyboardNavigation", {
-  enumerable: true,
-  get: function get() {
-    return _gridNavigation.KeyDownHandler;
-  }
-});
 exports["default"] = void 0;
-var _react = _interopRequireDefault(require("react"));
 var _Button = _interopRequireDefault(require("@mui/material/Button"));
 var _Add = _interopRequireDefault(require("@mui/icons-material/Add"));
 require("./style.css");
 var _reactI18next = require("react-i18next");
 var _formik = require("formik");
+var _react = _interopRequireDefault(require("react"));
 var _InputGridDeleteRowBtn = _interopRequireDefault(require("./components/InputGridDeleteRowBtn"));
 var _material = require("@mui/material");
 var _createTableError = require("./utils/createTableError");
-var _gridNavigation = require("./utils/gridNavigation");
-var _InputGridAutoComplete = _interopRequireDefault(require("./components/InputGridAutoComplete"));
-var _InputGridCurrencyInput = _interopRequireDefault(require("./components/InputGridCurrencyInput"));
-var _InputGridDatepicker = _interopRequireDefault(require("./components/InputGridDatepicker"));
-var _InputGridInput = _interopRequireDefault(require("./components/InputGridInput"));
+var _GridNavigation = require("./utils/GridNavigation/GridNavigation");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 var GHGrid = function GHGrid(_ref) {
   var title = _ref.title,
@@ -60,13 +26,14 @@ var GHGrid = function GHGrid(_ref) {
     addRowFunction = _ref.addRowFunction,
     rowFocusFunction = _ref.rowFocusFunction,
     rowFocusState = _ref.rowFocusState,
-    removeRowOperation = _ref.removeRowOperation,
+    _ref$removeRowOperati = _ref.removeRowOperation,
+    removeRowOperation = _ref$removeRowOperati === void 0 ? function () {} : _ref$removeRowOperati,
     _ref$showFooter = _ref.showFooter,
-    showFooter = _ref$showFooter === void 0 ? "true" : _ref$showFooter,
+    showFooter = _ref$showFooter === void 0 ? true : _ref$showFooter,
     _ref$showDelete = _ref.showDelete,
-    showDelete = _ref$showDelete === void 0 ? "true" : _ref$showDelete,
+    showDelete = _ref$showDelete === void 0 ? true : _ref$showDelete,
     _ref$showAddButton = _ref.showAddButton,
-    showAddButton = _ref$showAddButton === void 0 ? "true" : _ref$showAddButton,
+    showAddButton = _ref$showAddButton === void 0 ? true : _ref$showAddButton,
     customUpperButtonFunction = _ref.customUpperButtonFunction;
   var _useTranslation = (0, _reactI18next.useTranslation)(),
     t = _useTranslation.t,
@@ -74,14 +41,14 @@ var GHGrid = function GHGrid(_ref) {
   var theme = (0, _material.useTheme)();
   return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("div", {
     className: "row align-items-center"
-  }, /*#__PURE__*/_react["default"].createElement("div", {
+  }, typeof title !== "undefined" ? /*#__PURE__*/_react["default"].createElement("div", {
     className: "content col-lg-6 col-6"
   }, /*#__PURE__*/_react["default"].createElement("div", {
     className: "title mb-0"
   }, /*#__PURE__*/_react["default"].createElement("span", {
     className: "span"
-  }, " ", title, " "))), typeof customUpperButtonFunction === "undefined" ? /*#__PURE__*/_react["default"].createElement("div", {
-    className: "content col-lg-6 col-6"
+  }, " ", title, " "))) : null, typeof customUpperButtonFunction === "undefined" ? /*#__PURE__*/_react["default"].createElement("div", {
+    className: "content ".concat(typeof title === "undefined" ? "col-lg-6 col-6" : "col-12")
   }, showAddButton ? /*#__PURE__*/_react["default"].createElement("div", {
     className: "d-flex justify-content-end"
   }, /*#__PURE__*/_react["default"].createElement(_Button["default"], {
@@ -92,7 +59,7 @@ var GHGrid = function GHGrid(_ref) {
       setTimeout(function () {
         var added = e.target.closest("div").parentElement.nextSibling.querySelector('tbody tr:last-child td:nth-child(2)');
         while (added.querySelector("button:not([aria-label='Clear'])") || added.querySelector("input").disabled) {
-          added = (0, _gridNavigation.findNextFocusable)(added);
+          added = (0, _GridNavigation.findNextFocusable)(added);
         }
         added.querySelector("input").focus();
       }, 0);
@@ -135,15 +102,18 @@ var GHGrid = function GHGrid(_ref) {
           return column.show || typeof column.show === "undefined" ? /*#__PURE__*/_react["default"].createElement("td", {
             key: index,
             style: {
-              width: column.width,
-              minWidth: column.minWidth
+              width: column.width ? column.width : "auto",
+              minWidth: column.minWidth ? column.minWidth : "auto"
             }
           }, column.content(arrayIndex)) : null;
         }), showDelete ? /*#__PURE__*/_react["default"].createElement("td", {
           style: {
             width: '40px'
           }
-        }, /*#__PURE__*/_react["default"].createElement(_InputGridDeleteRowBtn["default"], {
+        }, /*#__PURE__*/_react["default"].createElement("input", {
+          disabled: true,
+          hidden: true
+        }), /*#__PURE__*/_react["default"].createElement(_InputGridDeleteRowBtn["default"], {
           onClick: function onClick() {
             removeRowOperation(arrayIndex);
             remove(arrayIndex);
@@ -167,5 +137,9 @@ var GHGrid = function GHGrid(_ref) {
     }, error ? " ".concat(t("ردیف"), " ").concat(index + 1, " : ").concat((0, _createTableError.CreateTableError)(error)) : null);
   }))));
 };
-var _default = GHGrid;
+var _default = GHGrid; // export {default as InputGridAutoComplete} from "./components/GHAutocomplete/InputGridAutoComplete"
+// export {default as InputGridCurrencyInput} from "./components/GHCurrencyInput/InputGridCurrencyInput"
+// export {default as InputGridDatepicker} from "./components/GHDatepicker/InputGridDatepicker"
+// export {default as InputGridInput} from "./components/GHInput/InputGridInput"
+// export {KeyDownHandler as KeyboardNavigation} from "./utils/gridNavigation"
 exports["default"] = _default;

@@ -1,13 +1,13 @@
-import React from 'react';
 import Button from "@mui/material/Button";
 import AddIcon from '@mui/icons-material/Add';
 import "./style.css";
 import { useTranslation } from "react-i18next";
 import { FieldArray } from "formik";
+import React from "react";
 import InputGridDeleteRowBtn from "./components/InputGridDeleteRowBtn";
 import { useTheme } from "@mui/material";
 import { CreateTableError } from "./utils/createTableError";
-import { findNextFocusable } from "./utils/gridNavigation";
+import { findNextFocusable } from "./utils/GridNavigation/GridNavigation";
 
 const GHGrid = ({
     title,
@@ -20,23 +20,26 @@ const GHGrid = ({
     addRowFunction,
     rowFocusFunction,
     rowFocusState,
-    removeRowOperation,
-    showFooter = "true",
-    showDelete = "true",
-    showAddButton = "true",
+    removeRowOperation = () => { },
+    showFooter = true,
+    showDelete = true,
+    showAddButton = true,
     customUpperButtonFunction }) => {
     const { t, i18n } = useTranslation()
     const theme = useTheme();
+
     return (
         <>
             <div className="row align-items-center">
-                <div className='content col-lg-6 col-6'>
-                    <div className='title mb-0'>
-                        <span className='span'> {title} </span>
-                    </div>
-                </div>
-                {typeof (customUpperButtonFunction) === "undefined" ?
+                {typeof (title) !== "undefined" ?
                     <div className='content col-lg-6 col-6'>
+                        <div className='title mb-0'>
+                            <span className='span'> {title} </span>
+                        </div>
+                    </div> : null
+                }
+                {typeof (customUpperButtonFunction) === "undefined" ?
+                    <div className={`content ${typeof (title) === "undefined" ? "col-lg-6 col-6" : "col-12"}`}>
                         {/* Copyright Ghafourian© Grid V4.0
                         All rights reserved */}
                         {showAddButton ?
@@ -98,8 +101,8 @@ const GHGrid = ({
                                                             <td
                                                                 key={index}
                                                                 style={{
-                                                                    width: column.width,
-                                                                    minWidth: column.minWidth
+                                                                    width: column.width ? column.width : "auto",
+                                                                    minWidth: column.minWidth ? column.minWidth : "auto"
                                                                 }}
                                                             >
                                                                 {column.content(arrayIndex)}
@@ -107,6 +110,7 @@ const GHGrid = ({
                                                     ))}
                                                     {showDelete ?
                                                         <td style={{ width: '40px' }}>
+                                                            <input disabled hidden />
                                                             <InputGridDeleteRowBtn
                                                                 onClick={() => {
                                                                     removeRowOperation(arrayIndex)
@@ -152,8 +156,8 @@ const GHGrid = ({
 }
 export default GHGrid
 
-export {default as InputGridAutoComplete} from "./components/InputGridAutoComplete"
-export {default as InputGridCurrencyInput} from "./components/InputGridCurrencyInput"
-export {default as InputGridDatepicker} from "./components/InputGridDatepicker"
-export {default as InputGridInput} from "./components/InputGridInput"
-export {KeyDownHandler as KeyboardNavigation} from "./utils/gridNavigation"
+// export {default as InputGridAutoComplete} from "./components/GHAutocomplete/InputGridAutoComplete"
+// export {default as InputGridCurrencyInput} from "./components/GHCurrencyInput/InputGridCurrencyInput"
+// export {default as InputGridDatepicker} from "./components/GHDatepicker/InputGridDatepicker"
+// export {default as InputGridInput} from "./components/GHInput/InputGridInput"
+// export {KeyDownHandler as KeyboardNavigation} from "./utils/gridNavigation"

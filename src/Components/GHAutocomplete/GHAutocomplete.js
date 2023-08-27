@@ -1,22 +1,22 @@
-import React from 'react';
 import { useTranslation } from "react-i18next"
 import Autocomplete from "@mui/material/Autocomplete"
 import CircularProgress from "@mui/material/CircularProgress"
 import { useState } from "react"
 
-export default function InputGridAutoComplete ({
+const GHAutocomplete = ({
     innerWidth = 300,
     innerFontSize = '12px',
     backgroundColor = '#FFFFFF',
     loadingState,
+    allowClear = false,
     ...props
-}) {
+}) => {
     const { t, i18n } = useTranslation()
     const [width, setWidth] = useState(innerWidth)
     const [fontSize, setFontSize] = useState(innerFontSize)
     const [bgColor, setBgColor] = useState(backgroundColor)
     return (
-        <Autocomplete
+        <Autocomplete 
             componentsProps={{
                 paper: {
                     sx: {
@@ -40,7 +40,7 @@ export default function InputGridAutoComplete ({
             }
             size="small"
             isOptionEqualToValue={(option, value) => option?.value === value?.value}
-            disableClearable={true}
+            disableClearable={!allowClear}
             forcePopupIcon={false}
             noOptionsText={t("اطلاعات یافت نشد")}
             loading
@@ -54,3 +54,4 @@ export default function InputGridAutoComplete ({
         />
     )
 }
+export default GHAutocomplete

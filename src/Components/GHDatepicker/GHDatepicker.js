@@ -1,9 +1,8 @@
-import React from 'react';
 import DatePicker from "react-multi-date-picker";
 import { useTranslation } from "react-i18next";
-import { renderCalendarLocaleSwitch, renderCalendarSwitch } from "../utils/calendarLang";
+import { renderCalendarLocaleSwitch, renderCalendarSwitch } from "../../utils/calendarLang";
 
-export default function InputGridDatepicker (props) {
+const GHDatepicker = (props) => {
     const {t, i18n} = useTranslation()
     return (
         <DatePicker
@@ -16,3 +15,4 @@ export default function InputGridDatepicker (props) {
         />
     )
 }
+export default GHDatepicker
