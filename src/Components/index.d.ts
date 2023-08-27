@@ -12,4 +12,3 @@ export * from "./GHInput/GHInput"
 
 export {default as GHGrid} from "./GHGrid/GHGrid"
 export * from "./GHGrid/GHGrid"
-
