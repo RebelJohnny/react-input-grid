@@ -9,6 +9,18 @@ import { useTheme } from "@mui/material";
 import { CreateTableError } from "../../utils/createTableError";
 import { findNextFocusable } from "../../utils/GridNavigation/GridNavigation";
 
+/**
+ * @typedef {Object} Props
+ * @property {string} title - title above grid
+ * @property {string} fieldArrayName  - name of field array, needed for <FieldArray>
+ * @property {string} fieldArrayKey - name of the property used in the empty field array object for unique identifier
+ * @property {}
+ */
+
+/**
+ * My React component.
+ * @param {Props} props 
+ */
 const GHGrid = ({
     title,
     fieldArrayName,

@@ -15,6 +15,17 @@ var _material = require("@mui/material");
 var _createTableError = require("../../utils/createTableError");
 var _GridNavigation = require("../../utils/GridNavigation/GridNavigation");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+/**
+ * @typedef {Object} Props
+ * @property {string} title - title above grid
+ * @property {string} fieldArrayName  - name of field array, needed for <FieldArray>
+ * @property {string} fieldArrayKey - name of the property used in the empty field array object for unique identifier
+ * @property {}
+ */
+/**
+ * My React component.
+ * @param {Props} props 
+ */
 var GHGrid = function GHGrid(_ref) {
   var title = _ref.title,
     fieldArrayName = _ref.fieldArrayName,
