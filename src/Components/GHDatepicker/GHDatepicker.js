@@ -1,3 +1,4 @@
+import React from "react"
 import DatePicker from "react-multi-date-picker";
 import { useTranslation } from "react-i18next";
 import { renderCalendarLocaleSwitch, renderCalendarSwitch } from "../../utils/calendarLang";

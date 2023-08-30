@@ -1,7 +1,7 @@
+import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
 import Autocomplete from "@mui/material/Autocomplete"
 import CircularProgress from "@mui/material/CircularProgress"
-import { useState } from "react"
 
 const GHAutocomplete = ({
     innerWidth = 300,
