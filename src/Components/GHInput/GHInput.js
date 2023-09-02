@@ -1,4 +1,5 @@
 import React,{ useState } from "react"
+import GHGrid from "../GHGrid/GHGrid"
 
 
 const GHInput = ({ inputType = "text", ...props }) => {
