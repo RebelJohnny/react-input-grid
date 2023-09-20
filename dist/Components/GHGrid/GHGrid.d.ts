@@ -48,11 +48,11 @@ declare function GHGrid({ title, fieldArrayName, fieldArrayKey, fieldArrayValues
     /**
      * Array of cells used to construct the grid body.
      */
-    columns: ColumnObject;
+    columns: ColumnObject[];
     /**
      * Array of cells used to construct the grid footer.
      */
-    footer: FooterObject;
+    footer: FooterObject[];
     /**
      * Function that triggers when add row button is clicked.
      * Usually used to add an object to the formik FieldArray
