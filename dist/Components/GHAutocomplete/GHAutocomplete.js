@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 var _react = _interopRequireWildcard(require("react"));
-var _reactI18next = require("react-i18next");
 var _Autocomplete = _interopRequireDefault(require("@mui/material/Autocomplete"));
 var _CircularProgress = _interopRequireDefault(require("@mui/material/CircularProgress"));
 var _excluded = ["innerWidth", "innerFontSize", "backgroundColor", "loadingState", "allowClear"];
@@ -33,9 +32,6 @@ var GHAutocomplete = function GHAutocomplete(_ref) {
     _ref$allowClear = _ref.allowClear,
     allowClear = _ref$allowClear === void 0 ? false : _ref$allowClear,
     props = _objectWithoutProperties(_ref, _excluded);
-  var _useTranslation = (0, _reactI18next.useTranslation)(),
-    t = _useTranslation.t,
-    i18n = _useTranslation.i18n;
   var _useState = (0, _react.useState)(innerWidth),
     _useState2 = _slicedToArray(_useState, 2),
     width = _useState2[0],
@@ -56,17 +52,18 @@ var GHAutocomplete = function GHAutocomplete(_ref) {
             width: width
           },
           maxWidth: '90vw',
-          direction: i18n.dir(),
+          // direction: i18n.dir(),
           position: "absolute",
           fontSize: {
             fontSize: fontSize
-          },
-          right: i18n.dir() === "rtl" ? "0" : "unset"
+          }
+          // right: i18n.dir() === "rtl" ? "0" : "unset"
         }
       }
     },
+
     sx: {
-      direction: i18n.dir(),
+      // direction: i18n.dir(),
       position: "relative",
       background: {
         bgColor: bgColor
@@ -81,10 +78,14 @@ var GHAutocomplete = function GHAutocomplete(_ref) {
       return (option === null || option === void 0 ? void 0 : option.value) === (value === null || value === void 0 ? void 0 : value.value);
     },
     disableClearable: !allowClear,
-    forcePopupIcon: false,
-    noOptionsText: t("اطلاعات یافت نشد"),
-    loading: true,
-    loadingText: loadingState ? /*#__PURE__*/_react["default"].createElement(_CircularProgress["default"], null) : t("اطلاعات یافت نشد"),
+    forcePopupIcon: false
+    // noOptionsText={t("اطلاعات یافت نشد")}
+    ,
+    noOptionsText: "اطلاعات یافت نشد",
+    loading: true
+    // loadingText={loadingState ? <CircularProgress /> : t("اطلاعات یافت نشد")}
+    ,
+    loadingText: loadingState ? /*#__PURE__*/_react["default"].createElement(_CircularProgress["default"], null) : "اطلاعات یافت نشد",
     renderInput: function renderInput(params) {
       return /*#__PURE__*/_react["default"].createElement("div", {
         ref: params.InputProps.ref
