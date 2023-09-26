@@ -34,7 +34,7 @@ var GHAutocomplete = function GHAutocomplete(_ref) {
     _ref$allowClear = _ref.allowClear,
     allowClear = _ref$allowClear === void 0 ? false : _ref$allowClear,
     _ref$dir = _ref.dir,
-    dir = _ref$dir === void 0 ? "rtl" : _ref$dir,
+    dir = _ref$dir === void 0 ? "ltr" : _ref$dir,
     props = _objectWithoutProperties(_ref, _excluded);
   var _useState = (0, _react.useState)(innerWidth),
     _useState2 = _slicedToArray(_useState, 2),
@@ -56,17 +56,17 @@ var GHAutocomplete = function GHAutocomplete(_ref) {
             width: width
           },
           maxWidth: '90vw',
-          direction: document.dir,
+          direction: dir,
           position: "absolute",
           fontSize: {
             fontSize: fontSize
           },
-          right: document.dir === "rtl" ? "0" : "unset"
+          right: dir === "rtl" ? "0" : "unset"
         }
       }
     },
     sx: {
-      direction: document.dir,
+      direction: dir,
       position: "relative",
       background: {
         bgColor: bgColor
