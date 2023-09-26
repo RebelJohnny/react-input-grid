@@ -6,4 +6,5 @@ declare function GHAutocomplete({ innerWidth, innerFontSize, backgroundColor, lo
     backgroundColor?: string;
     loadingState: any;
     allowClear?: boolean;
+    noOptionsText: string;
 }): any;

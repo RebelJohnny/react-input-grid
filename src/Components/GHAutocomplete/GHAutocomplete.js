@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import Autocomplete from "@mui/material/Autocomplete"
 import CircularProgress from "@mui/material/CircularProgress"
 const GHAutocomplete = ({
+    noOptionsText = "",
     innerWidth = 300,
     innerFontSize = '12px',
     backgroundColor = '#FFFFFF',
@@ -39,11 +40,9 @@ const GHAutocomplete = ({
             isOptionEqualToValue={(option, value) => option?.value === value?.value}
             disableClearable={!allowClear}
             forcePopupIcon={false}
-            noOptionsText={t("اطلاعات یافت نشد")}
-            // noOptionsText={"اطلاعات یافت نشد"}
+            noOptionsText={noOptionsText}
             loading
-            loadingText={loadingState ? <CircularProgress /> : t("اطلاعات یافت نشد")}
-            // loadingText={loadingState ? <CircularProgress /> : "اطلاعات یافت نشد"}
+            loadingText={loadingState ? <CircularProgress /> : noOptionsText}
             renderInput={(params) => (
                 <div ref={params.InputProps.ref}>
                     <input type="text" {...params.inputProps} className='form-input' />
