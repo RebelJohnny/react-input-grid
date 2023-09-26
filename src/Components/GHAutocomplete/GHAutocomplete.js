@@ -1,10 +1,7 @@
 import React, { useState } from "react"
 import Autocomplete from "@mui/material/Autocomplete"
 import CircularProgress from "@mui/material/CircularProgress"
-import { withTranslation } from "react-i18next"
 const GHAutocomplete = ({
-    t,
-    i18n,
     innerWidth = 300,
     innerFontSize = '12px',
     backgroundColor = '#FFFFFF',
@@ -22,16 +19,16 @@ const GHAutocomplete = ({
                     sx: {
                         width: { width },
                         maxWidth: '90vw',
-                        direction: i18n.dir(),
+                        direction: document.dir,
                         position: "absolute",
                         fontSize: { fontSize },
-                        right: i18n.dir() === "rtl" ? "0" : "unset"
+                        right: document.dir === "rtl" ? "0" : "unset"
                     }
                 }
             }}
             sx={
                 {
-                    direction: i18n.dir(),
+                    direction: document.dir,
                     position: "relative",
                     background: { bgColor },
                     borderRadius: 0,
@@ -56,4 +53,4 @@ const GHAutocomplete = ({
         />
     )
 }
-export default withTranslation()(GHAutocomplete)
+export default GHAutocomplete
