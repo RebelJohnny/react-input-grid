@@ -8,6 +8,7 @@ const GHAutocomplete = ({
     backgroundColor = '#FFFFFF',
     loadingState,
     allowClear = false,
+    dir = "ltr",
     ...props
 }) => {
     const [width, setWidth] = useState(innerWidth)
@@ -20,16 +21,16 @@ const GHAutocomplete = ({
                     sx: {
                         width: { width },
                         maxWidth: '90vw',
-                        direction: document.dir,
+                        direction: dir,
                         position: "absolute",
                         fontSize: { fontSize },
-                        right: document.dir === "rtl" ? "0" : "unset"
+                        right: dir === "rtl" ? "0" : "unset"
                     }
                 }
             }}
             sx={
                 {
-                    direction: document.dir,
+                    direction: dir,
                     position: "relative",
                     background: { bgColor },
                     borderRadius: 0,
