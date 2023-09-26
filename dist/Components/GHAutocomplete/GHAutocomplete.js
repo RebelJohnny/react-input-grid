@@ -8,6 +8,7 @@ exports["default"] = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _Autocomplete = _interopRequireDefault(require("@mui/material/Autocomplete"));
 var _CircularProgress = _interopRequireDefault(require("@mui/material/CircularProgress"));
+var _reactI18next = require("react-i18next");
 var _excluded = ["innerWidth", "innerFontSize", "backgroundColor", "loadingState", "allowClear"];
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -44,58 +45,60 @@ var GHAutocomplete = function GHAutocomplete(_ref) {
     _useState6 = _slicedToArray(_useState5, 2),
     bgColor = _useState6[0],
     setBgColor = _useState6[1];
-  return /*#__PURE__*/_react["default"].createElement(_Autocomplete["default"], _extends({
-    componentsProps: {
-      paper: {
-        sx: {
-          width: {
-            width: width
-          },
-          maxWidth: '90vw',
-          // direction: i18n.dir(),
-          position: "absolute",
-          fontSize: {
-            fontSize: fontSize
+  return /*#__PURE__*/_react["default"].createElement(_reactI18next.Translation, null, function (t, _ref2) {
+    var i18n = _ref2.i18n;
+    return /*#__PURE__*/_react["default"].createElement(_Autocomplete["default"], _extends({
+      componentsProps: {
+        paper: {
+          sx: {
+            width: {
+              width: width
+            },
+            maxWidth: '90vw',
+            direction: i18n.dir(),
+            position: "absolute",
+            fontSize: {
+              fontSize: fontSize
+            },
+            right: i18n.dir() === "rtl" ? "0" : "unset"
           }
-          // right: i18n.dir() === "rtl" ? "0" : "unset"
         }
-      }
-    },
-
-    sx: {
-      // direction: i18n.dir(),
-      position: "relative",
-      background: {
-        bgColor: bgColor
       },
-      borderRadius: 0,
-      fontSize: {
-        fontSize: fontSize
+      sx: {
+        direction: i18n.dir(),
+        position: "relative",
+        background: {
+          bgColor: bgColor
+        },
+        borderRadius: 0,
+        fontSize: {
+          fontSize: fontSize
+        }
+      },
+      size: "small",
+      isOptionEqualToValue: function isOptionEqualToValue(option, value) {
+        return (option === null || option === void 0 ? void 0 : option.value) === (value === null || value === void 0 ? void 0 : value.value);
+      },
+      disableClearable: !allowClear,
+      forcePopupIcon: false,
+      noOptionsText: t("اطلاعات یافت نشد")
+      // noOptionsText={"اطلاعات یافت نشد"}
+      ,
+      loading: true,
+      loadingText: loadingState ? /*#__PURE__*/_react["default"].createElement(_CircularProgress["default"], null) : t("اطلاعات یافت نشد")
+      // loadingText={loadingState ? <CircularProgress /> : "اطلاعات یافت نشد"}
+      ,
+      renderInput: function renderInput(params) {
+        return /*#__PURE__*/_react["default"].createElement("div", {
+          ref: params.InputProps.ref
+        }, /*#__PURE__*/_react["default"].createElement("input", _extends({
+          type: "text"
+        }, params.inputProps, {
+          className: "form-input"
+        })));
       }
-    },
-    size: "small",
-    isOptionEqualToValue: function isOptionEqualToValue(option, value) {
-      return (option === null || option === void 0 ? void 0 : option.value) === (value === null || value === void 0 ? void 0 : value.value);
-    },
-    disableClearable: !allowClear,
-    forcePopupIcon: false
-    // noOptionsText={t("اطلاعات یافت نشد")}
-    ,
-    noOptionsText: "اطلاعات یافت نشد",
-    loading: true
-    // loadingText={loadingState ? <CircularProgress /> : t("اطلاعات یافت نشد")}
-    ,
-    loadingText: loadingState ? /*#__PURE__*/_react["default"].createElement(_CircularProgress["default"], null) : "اطلاعات یافت نشد",
-    renderInput: function renderInput(params) {
-      return /*#__PURE__*/_react["default"].createElement("div", {
-        ref: params.InputProps.ref
-      }, /*#__PURE__*/_react["default"].createElement("input", _extends({
-        type: "text"
-      }, params.inputProps, {
-        className: "form-input"
-      })));
-    }
-  }, props));
+    }, props));
+  });
 };
 var _default = GHAutocomplete;
 exports["default"] = _default;
