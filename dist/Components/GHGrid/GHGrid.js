@@ -48,7 +48,7 @@ var GHGrid = function GHGrid(_ref) {
   }, /*#__PURE__*/_react["default"].createElement("span", {
     className: "span"
   }, " ", title, " "))) : null, typeof customUpperButtonFunction === "undefined" ? /*#__PURE__*/_react["default"].createElement("div", {
-    className: "content ".concat(typeof title === "undefined" ? "col-lg-6 col-6" : "col-12")
+    className: "content ".concat(typeof title === "undefined" ? "col-12" : "col-lg-6 col-6")
   }, showAddButton ? /*#__PURE__*/_react["default"].createElement("div", {
     className: "d-flex justify-content-end"
   }, /*#__PURE__*/_react["default"].createElement(_Button["default"], {

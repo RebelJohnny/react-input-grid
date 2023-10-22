@@ -39,7 +39,7 @@ const GHGrid = ({
                     </div> : null
                 }
                 {typeof (customUpperButtonFunction) === "undefined" ?
-                    <div className={`content ${typeof (title) === "undefined" ? "col-lg-6 col-6" : "col-12"}`}>
+                    <div className={`content ${typeof (title) === "undefined" ? "col-12" : "col-lg-6 col-6" }`}>
                         {/* Copyright Ghafourian© Grid V4.0
                         All rights reserved */}
                         {showAddButton ?
