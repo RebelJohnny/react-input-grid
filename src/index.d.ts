@@ -14,3 +14,4 @@ export {default as GHGrid} from "./components/GHGrid/GHGrid"
 export * from "./components/GHGrid/GHGrid"
 
 export {KeyDownHandler as KeyboardNavigation} from "./utils/GridNavigation/GridNavigation"
+export {IsNavigationKey as IsNavigationKey} from "./utils/GridNavigation/GridNavigation"

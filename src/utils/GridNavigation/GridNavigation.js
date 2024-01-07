@@ -138,3 +138,7 @@ export function KeyDownHandler(e, autoCompleteStates, fieldArray, focusRow, addR
 const checkAllStatesFalse = (states) => {
     return states.every(state => state === false);
 }
+
+export function IsNavigationKey(e) {
+    return e.code === "ArrowDown" || e.code === "ArrowUp" || e.code === "ArrowLeft" || e.code === "ArrowRight" || e.code === "Tab" || e.code === "Enter"
+} 
