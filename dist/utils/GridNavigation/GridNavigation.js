@@ -3,6 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.IsNavigationKey = IsNavigationKey;
 exports.KeyDownHandler = KeyDownHandler;
 exports.MoveNext = MoveNext;
 exports.MovePrevious = MovePrevious;
@@ -149,3 +150,6 @@ var checkAllStatesFalse = function checkAllStatesFalse(states) {
     return state === false;
   });
 };
+function IsNavigationKey(e) {
+  return e.code === "ArrowDown" || e.code === "ArrowUp" || e.code === "ArrowLeft" || e.code === "ArrowRight" || e.code === "Tab" || e.code === "Enter";
+}

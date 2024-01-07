@@ -10,7 +10,8 @@ var _exportNames = {
   GHDatepicker: true,
   GHInput: true,
   GHGrid: true,
-  KeyboardNavigation: true
+  KeyboardNavigation: true,
+  IsNavigationKey: true
 };
 Object.defineProperty(exports, "GHAutocomplete", {
   enumerable: true,
@@ -40,6 +41,12 @@ Object.defineProperty(exports, "GHInput", {
   enumerable: true,
   get: function get() {
     return _GHInput["default"];
+  }
+});
+Object.defineProperty(exports, "IsNavigationKey", {
+  enumerable: true,
+  get: function get() {
+    return _GridNavigation.IsNavigationKey;
   }
 });
 Object.defineProperty(exports, "KeyboardNavigation", {
