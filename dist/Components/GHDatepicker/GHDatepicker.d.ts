@@ -1,2 +1,6 @@
 export default GHDatepicker;
-declare function GHDatepicker(props: any): any;
+declare function GHDatepicker({ onCorrectInput, onWrongInput, ...props }: {
+    [x: string]: any;
+    onCorrectInput: (date: object) => void;
+    onWrongInput: (date?: string) => void;
+}): any;
