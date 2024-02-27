@@ -88,6 +88,19 @@ declare function GHGrid({ title, fieldArrayName, fieldArrayKey, fieldArrayValues
      */
     showAddButton?: boolean;
     /**
+     * Defaults to true.
+     * Change to false in order to hide index column
+     */
+    showIndex?:boolean;
+    /**
+     * default: "ردیف"
+     */
+    indexHeader? : string;
+    /**
+     * return a <td> tag with what you want inside first column of your grid (index cell)
+     */
+    customIndexCell? : any;
+    /**
      * Use this in tandem with showAddButton: false to create your own buttons with custom functionalities.
      * This function returns a node in lieu of the predefined add button above grid.
      */

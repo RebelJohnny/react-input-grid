@@ -34,6 +34,12 @@ var GHGrid = function GHGrid(_ref) {
     showDelete = _ref$showDelete === void 0 ? true : _ref$showDelete,
     _ref$showAddButton = _ref.showAddButton,
     showAddButton = _ref$showAddButton === void 0 ? true : _ref$showAddButton,
+    _ref$showIndex = _ref.showIndex,
+    showIndex = _ref$showIndex === void 0 ? true : _ref$showIndex,
+    _ref$indexHeader = _ref.indexHeader,
+    indexHeader = _ref$indexHeader === void 0 ? "ردیف" : _ref$indexHeader,
+    _ref$customIndexCell = _ref.customIndexCell,
+    customIndexCell = _ref$customIndexCell === void 0 ? null : _ref$customIndexCell,
     customUpperButtonFunction = _ref.customUpperButtonFunction;
   var _useTranslation = (0, _reactI18next.useTranslation)(),
     t = _useTranslation.t,
@@ -72,7 +78,11 @@ var GHGrid = function GHGrid(_ref) {
     className: "table table-bordered "
   }, /*#__PURE__*/_react["default"].createElement("thead", null, /*#__PURE__*/_react["default"].createElement("tr", {
     className: "text-center"
-  }, /*#__PURE__*/_react["default"].createElement("th", null, t("ردیف")), columns.map(function (column, index) {
+  }, /*#__PURE__*/_react["default"].createElement("th", {
+    style: {
+      display: showIndex ? 'table-cell' : 'none'
+    }
+  }, t(indexHeader)), columns.map(function (column, index) {
     return column.show || typeof column.show === "undefined" ? /*#__PURE__*/_react["default"].createElement("th", {
       key: index
     }, column.header) : null;
@@ -92,13 +102,14 @@ var GHGrid = function GHGrid(_ref) {
           onFocus: function onFocus(e) {
             return rowFocusFunction(e);
           }
-        }, /*#__PURE__*/_react["default"].createElement("td", {
+        }, customIndexCell === null ? /*#__PURE__*/_react["default"].createElement("td", {
           className: "text-center",
           style: {
             verticalAlign: 'middle',
-            width: '40px'
+            width: '40px',
+            display: showIndex ? 'table-cell' : 'none'
           }
-        }, arrayIndex + 1), columns.map(function (column, index) {
+        }, arrayIndex + 1) : customIndexCell, columns.map(function (column, index) {
           return column.show || typeof column.show === "undefined" ? /*#__PURE__*/_react["default"].createElement("td", {
             key: index,
             style: {

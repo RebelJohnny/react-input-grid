@@ -24,6 +24,9 @@ const GHGrid = ({
     showFooter = true,
     showDelete = true,
     showAddButton = true,
+    showIndex = true,
+    indexHeader = "ردیف",
+    customIndexCell = null,
     customUpperButtonFunction }) => {
     const { t, i18n } = useTranslation()
     const theme = useTheme();
@@ -39,7 +42,7 @@ const GHGrid = ({
                     </div> : null
                 }
                 {typeof (customUpperButtonFunction) === "undefined" ?
-                    <div className={`content ${typeof (title) === "undefined" ? "col-12" : "col-lg-6 col-6" }`}>
+                    <div className={`content ${typeof (title) === "undefined" ? "col-12" : "col-lg-6 col-6"}`}>
                         {/* Copyright Ghafourian© Grid V4.0
                         All rights reserved */}
                         {showAddButton ?
@@ -68,7 +71,7 @@ const GHGrid = ({
                         <table className="table table-bordered ">
                             <thead>
                                 <tr className='text-center'>
-                                    <th>{t("ردیف")}</th>
+                                    <th style={{ display: showIndex ? 'table-cell' : 'none' }}>{t(indexHeader)}</th>
                                     {columns.map((column, index) => (
                                         column.show || typeof (column.show) === "undefined" ?
                                             <th key={index}>{column.header}</th> : null
@@ -89,13 +92,16 @@ const GHGrid = ({
                                                     className={rowFocusState === arrayIndex + 1 ? 'focus-row-bg' : ''}
                                                     onFocus={(e) => rowFocusFunction(e)}
                                                 >
-                                                    <td className='text-center'
-                                                        style={{
-                                                            verticalAlign: 'middle',
-                                                            width: '40px'
-                                                        }}>
-                                                        {arrayIndex + 1}
-                                                    </td>
+                                                    {customIndexCell === null ?
+                                                        <td className='text-center'
+                                                            style={{
+                                                                verticalAlign: 'middle',
+                                                                width: '40px',
+                                                                display: showIndex ? 'table-cell' : 'none'
+                                                            }}>
+                                                            {arrayIndex + 1}
+                                                        </td>
+                                                        : customIndexCell}
                                                     {columns.map((column, index) => (
                                                         column.show || typeof (column.show) === "undefined" ?
                                                             <td
