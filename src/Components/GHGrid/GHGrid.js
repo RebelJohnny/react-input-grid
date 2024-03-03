@@ -101,7 +101,7 @@ const GHGrid = ({
                                                             }}>
                                                             {arrayIndex + 1}
                                                         </td>
-                                                        : customIndexCell}
+                                                        : customIndexCell()}
                                                     {columns.map((column, index) => (
                                                         column.show || typeof (column.show) === "undefined" ?
                                                             <td

@@ -109,7 +109,7 @@ var GHGrid = function GHGrid(_ref) {
             width: '40px',
             display: showIndex ? 'table-cell' : 'none'
           }
-        }, arrayIndex + 1) : customIndexCell, columns.map(function (column, index) {
+        }, arrayIndex + 1) : customIndexCell(), columns.map(function (column, index) {
           return column.show || typeof column.show === "undefined" ? /*#__PURE__*/_react["default"].createElement("td", {
             key: index,
             style: {
