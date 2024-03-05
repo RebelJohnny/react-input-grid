@@ -123,7 +123,7 @@ const GHGrid = ({
                                                                     removeRowOperation(arrayIndex)
                                                                     remove(arrayIndex)
                                                                 }}
-                                                                disabled={disableRemoveExpr}
+                                                                disabled={() => disableRemoveExpr(arrayIndex)}
                                                             />
                                                         </td> : null}
                                                 </tr>
