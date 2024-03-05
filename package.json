@@ -3,7 +3,7 @@
     "build": "babel ./src -d ./dist && npx copyfiles -f ./src/*.css ./dist && npx copyfiles -f ./src/assets/fonts/*.woff ./dist/assets/fonts && npx copyfiles -f ./src/assets/fonts/*.woff2 ./dist/assets/fonts && npx copyfiles -u 1 \"./!(node_modules)/**/*.d.ts\" ./dist"
   },
   "name": "react-input-grid",
-  "version": "1.4.12",
+  "version": "1.4.13",
   "main": "dist/index.js",
   "files": [
     "dist"

@@ -27,7 +27,8 @@ const GHGrid = ({
     showIndex = true,
     indexHeader = "ردیف",
     customIndexCell = null,
-    customUpperButtonFunction }) => {
+    customUpperButtonFunction,
+    disableRemoveExpr }) => {
     const { t, i18n } = useTranslation()
     const theme = useTheme();
 
@@ -122,6 +123,7 @@ const GHGrid = ({
                                                                     removeRowOperation(arrayIndex)
                                                                     remove(arrayIndex)
                                                                 }}
+                                                                disabled={disableRemoveExpr}
                                                             />
                                                         </td> : null}
                                                 </tr>

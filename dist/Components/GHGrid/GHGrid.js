@@ -40,7 +40,8 @@ var GHGrid = function GHGrid(_ref) {
     indexHeader = _ref$indexHeader === void 0 ? "ردیف" : _ref$indexHeader,
     _ref$customIndexCell = _ref.customIndexCell,
     customIndexCell = _ref$customIndexCell === void 0 ? null : _ref$customIndexCell,
-    customUpperButtonFunction = _ref.customUpperButtonFunction;
+    customUpperButtonFunction = _ref.customUpperButtonFunction,
+    disableRemoveExpr = _ref.disableRemoveExpr;
   var _useTranslation = (0, _reactI18next.useTranslation)(),
     t = _useTranslation.t,
     i18n = _useTranslation.i18n;
@@ -128,7 +129,8 @@ var GHGrid = function GHGrid(_ref) {
           onClick: function onClick() {
             removeRowOperation(arrayIndex);
             remove(arrayIndex);
-          }
+          },
+          disabled: disableRemoveExpr
         })) : null);
       }));
     }

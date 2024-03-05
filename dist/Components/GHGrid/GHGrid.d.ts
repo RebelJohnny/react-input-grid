@@ -105,4 +105,8 @@ declare function GHGrid({ title, fieldArrayName, fieldArrayKey, fieldArrayValues
      * This function returns a node in lieu of the predefined add button above grid.
      */
     customUpperButtonFunction: any;
+    /**
+     * Used to disable the delete button on a row
+     */
+    disableRemoveExpr : boolean;
 }): any;
