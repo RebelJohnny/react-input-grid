@@ -28,7 +28,7 @@ const GHGrid = ({
     indexHeader = "ردیف",
     customIndexCell = null,
     customUpperButtonFunction,
-    disableRemoveExpr }) => {
+    disableRemoveExpr = () => {return false} }) => {
     const { t, i18n } = useTranslation()
     const theme = useTheme();
 

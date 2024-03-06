@@ -108,5 +108,5 @@ declare function GHGrid({ title, fieldArrayName, fieldArrayKey, fieldArrayValues
     /**
      * Used to disable the delete button on a row
      */
-    disableRemoveExpr : () => boolean;
+    disableRemoveExpr? : () => boolean;
 }): any;

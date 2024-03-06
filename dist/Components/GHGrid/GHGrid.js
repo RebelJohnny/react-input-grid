@@ -41,7 +41,10 @@ var GHGrid = function GHGrid(_ref) {
     _ref$customIndexCell = _ref.customIndexCell,
     customIndexCell = _ref$customIndexCell === void 0 ? null : _ref$customIndexCell,
     customUpperButtonFunction = _ref.customUpperButtonFunction,
-    disableRemoveExpr = _ref.disableRemoveExpr;
+    _ref$disableRemoveExp = _ref.disableRemoveExpr,
+    disableRemoveExpr = _ref$disableRemoveExp === void 0 ? function () {
+      return false;
+    } : _ref$disableRemoveExp;
   var _useTranslation = (0, _reactI18next.useTranslation)(),
     t = _useTranslation.t,
     i18n = _useTranslation.i18n;
