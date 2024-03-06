@@ -130,9 +130,7 @@ var GHGrid = function GHGrid(_ref) {
             removeRowOperation(arrayIndex);
             remove(arrayIndex);
           },
-          disabled: function disabled() {
-            return disableRemoveExpr(arrayIndex);
-          }
+          disabled: disableRemoveExpr(arrayIndex)
         })) : null);
       }));
     }
