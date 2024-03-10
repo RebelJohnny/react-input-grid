@@ -109,4 +109,10 @@ declare function GHGrid({ title, fieldArrayName, fieldArrayKey, fieldArrayValues
      * Used to disable the delete button on a row
      */
     disableRemoveExpr? : () => boolean;
+    /**
+     * this function shall translate your string if you pass a "t" function from the useTranslation or any other similar hook
+     * @param value any string
+     * @returns translated string
+     */
+    translatorFunction?: (value: string) => string;
 }): any;

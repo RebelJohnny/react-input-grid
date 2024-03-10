@@ -7,7 +7,6 @@ exports["default"] = void 0;
 var _Button = _interopRequireDefault(require("@mui/material/Button"));
 var _Add = _interopRequireDefault(require("@mui/icons-material/Add"));
 require("../../style.css");
-var _reactI18next = require("react-i18next");
 var _formik = require("formik");
 var _react = _interopRequireDefault(require("react"));
 var _InputGridDeleteRowBtn = _interopRequireDefault(require("../InputGridDeleteRowBtn"));
@@ -41,13 +40,14 @@ var GHGrid = function GHGrid(_ref) {
     _ref$customIndexCell = _ref.customIndexCell,
     customIndexCell = _ref$customIndexCell === void 0 ? null : _ref$customIndexCell,
     customUpperButtonFunction = _ref.customUpperButtonFunction,
+    _ref$translatorFuncti = _ref.translatorFunction,
+    translatorFunction = _ref$translatorFuncti === void 0 ? function (value) {
+      return value;
+    } : _ref$translatorFuncti,
     _ref$disableRemoveExp = _ref.disableRemoveExpr,
     disableRemoveExpr = _ref$disableRemoveExp === void 0 ? function () {
       return false;
     } : _ref$disableRemoveExp;
-  var _useTranslation = (0, _reactI18next.useTranslation)(),
-    t = _useTranslation.t,
-    i18n = _useTranslation.i18n;
   var theme = (0, _material.useTheme)();
   return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("div", {
     className: "row align-items-center"
@@ -86,11 +86,11 @@ var GHGrid = function GHGrid(_ref) {
     style: {
       display: showIndex ? 'table-cell' : 'none'
     }
-  }, t(indexHeader)), columns.map(function (column, index) {
+  }, translatorFunction(indexHeader)), columns.map(function (column, index) {
     return column.show || typeof column.show === "undefined" ? /*#__PURE__*/_react["default"].createElement("th", {
       key: index
     }, column.header) : null;
-  }), showDelete ? /*#__PURE__*/_react["default"].createElement("th", null, t("حذف")) : null)), /*#__PURE__*/_react["default"].createElement("tbody", null, /*#__PURE__*/_react["default"].createElement(_formik.FieldArray, {
+  }), showDelete ? /*#__PURE__*/_react["default"].createElement("th", null, translatorFunction("حذف")) : null)), /*#__PURE__*/_react["default"].createElement("tbody", null, /*#__PURE__*/_react["default"].createElement(_formik.FieldArray, {
     name: fieldArrayName,
     validateOnChange: false,
     render: function render(_ref2) {
@@ -150,12 +150,8 @@ var GHGrid = function GHGrid(_ref) {
     return /*#__PURE__*/_react["default"].createElement("p", {
       className: "error-msg",
       key: index
-    }, error ? " ".concat(t("ردیف"), " ").concat(index + 1, " : ").concat((0, _createTableError.CreateTableError)(error)) : null);
+    }, error ? " ".concat(translatorFunction("ردیف"), " ").concat(index + 1, " : ").concat((0, _createTableError.CreateTableError)(error)) : null);
   }))));
 };
-var _default = GHGrid; // export {default as GHAutocomplete} from "./components/GHAutocomplete/GHAutocomplete"
-// export {default as GHCurrencyInput} from "./components/GHCurrencyInput/GHCurrencyInput"
-// export {default as GHDatepicker} from "./components/GHDatepicker/GHDatepicker"
-// export {default as GHInput} from "./components/GHInput/GHInput"
-// export {KeyDownHandler as KeyboardNavigation} from "../../utils/GridNavigation/GridNavigation"
+var _default = GHGrid;
 exports["default"] = _default;

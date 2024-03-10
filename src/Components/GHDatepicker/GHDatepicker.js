@@ -1,14 +1,16 @@
 import React from "react"
 import DatePicker from "react-multi-date-picker";
-import { useTranslation } from "react-i18next";
 import { renderCalendarLocaleSwitch, renderCalendarSwitch } from "../../utils/calendarLang";
 
-const GHDatepicker = ({ onCorrectInput, onWrongInput, ...props }) => {
-    const { t, i18n } = useTranslation()
+const GHDatepicker = ({
+    onCorrectInput,
+    onWrongInput,
+    language = "en",
+    ...props }) => {
     return (
         <DatePicker
-            calendar={renderCalendarSwitch(i18n.language)}
-            locale={renderCalendarLocaleSwitch(i18n.language)}
+            calendar={renderCalendarSwitch(language)}
+            locale={renderCalendarLocaleSwitch(language)}
             calendarPosition="bottom-right"
             onOpen={false}
             onOpenPickNewDate={false}

@@ -1,7 +1,6 @@
 import Button from "@mui/material/Button";
 import AddIcon from '@mui/icons-material/Add';
 import "../../style.css";
-import { useTranslation } from "react-i18next";
 import { FieldArray } from "formik";
 import React from "react";
 import InputGridDeleteRowBtn from "../InputGridDeleteRowBtn";
@@ -28,8 +27,8 @@ const GHGrid = ({
     indexHeader = "ردیف",
     customIndexCell = null,
     customUpperButtonFunction,
+    translatorFunction = (value) => {return value},
     disableRemoveExpr = () => {return false} }) => {
-    const { t, i18n } = useTranslation()
     const theme = useTheme();
 
     return (
@@ -72,12 +71,12 @@ const GHGrid = ({
                         <table className="table table-bordered ">
                             <thead>
                                 <tr className='text-center'>
-                                    <th style={{ display: showIndex ? 'table-cell' : 'none' }}>{t(indexHeader)}</th>
+                                    <th style={{ display: showIndex ? 'table-cell' : 'none' }}>{translatorFunction(indexHeader)}</th>
                                     {columns.map((column, index) => (
                                         column.show || typeof (column.show) === "undefined" ?
                                             <th key={index}>{column.header}</th> : null
                                     ))}
-                                    {showDelete ? <th>{t("حذف")}</th> : null}
+                                    {showDelete ? <th>{translatorFunction("حذف")}</th> : null}
                                 </tr>
                             </thead>
                             <tbody>
@@ -154,7 +153,7 @@ const GHGrid = ({
                 <div className='content col-lg-12 col-md-12 col-12'>
                     {fieldArrayErrors?.map((error, index) => (
                         <p className='error-msg' key={index}>
-                            {error ? ` ${t("ردیف")} ${index + 1} : ${CreateTableError(error)}` : null}
+                            {error ? ` ${translatorFunction("ردیف")} ${index + 1} : ${CreateTableError(error)}` : null}
                         </p>
                     ))}
                 </div>
@@ -163,9 +162,3 @@ const GHGrid = ({
     )
 }
 export default GHGrid
-
-// export {default as GHAutocomplete} from "./components/GHAutocomplete/GHAutocomplete"
-// export {default as GHCurrencyInput} from "./components/GHCurrencyInput/GHCurrencyInput"
-// export {default as GHDatepicker} from "./components/GHDatepicker/GHDatepicker"
-// export {default as GHInput} from "./components/GHInput/GHInput"
-// export {KeyDownHandler as KeyboardNavigation} from "../../utils/GridNavigation/GridNavigation"
