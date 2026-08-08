@@ -7,24 +7,30 @@ exports.IsNavigationKey = IsNavigationKey;
 exports.KeyDownHandler = KeyDownHandler;
 exports.MoveNext = MoveNext;
 exports.MovePrevious = MovePrevious;
+exports.NavigationContext = void 0;
 exports.findNextFocusable = findNextFocusable;
 exports.findPreviousFocusable = findPreviousFocusable;
+var _react = require("react");
+var _uuid = require("uuid");
 function findNextFocusable(element) {
   return element.closest("td").nextSibling;
 }
 function findPreviousFocusable(element) {
   return element.closest("td").previousSibling;
 }
-function MoveNext(formikTable, rowBuilderFunc, nextElement, gridFocusRow) {
+function MoveNext(fieldArrayLength, rowBuilderFunc, nextElement, gridFocusRow, addRowAllowed) {
   if (nextElement.cellIndex !== nextElement.closest("tr").children.length - 1) {
     nextElement.querySelector("input:not([type='hidden'])").focus();
     nextElement.querySelector("input:not([type='hidden'])").select();
   } else {
-    if (formikTable.length === gridFocusRow) {
+    if (fieldArrayLength === gridFocusRow) {
+      if (!addRowAllowed) {
+        return;
+      }
       rowBuilderFunc();
       setTimeout(function () {
         var temp = nextElement.closest("tr").nextSibling.children[1];
-        while (temp.cellIndex !== temp.closest("tr").children.length - 1 && (temp.querySelector("button:not([aria-label='Clear'])") || temp.querySelector("input").disabled)) {
+        while (temp.cellIndex !== temp.closest("tr").children.length - 1 && (temp.querySelector("button:not([tabindex='-1'])") || temp.querySelector("input").disabled)) {
           temp = findNextFocusable(temp);
         }
         temp.querySelector("input:not([type='hidden'])").focus();
@@ -35,7 +41,7 @@ function MoveNext(formikTable, rowBuilderFunc, nextElement, gridFocusRow) {
       }, 50);
     } else {
       var temp = nextElement.closest("tr").nextSibling.children[1];
-      while (temp.cellIndex !== temp.closest("tr").children.length - 1 && (temp.querySelector("button:not([aria-label='Clear'])") || temp.querySelector("input").disabled)) {
+      while (temp.cellIndex !== temp.closest("tr").children.length - 1 && (temp.querySelector("button:not([tabindex='-1'])") || temp.querySelector("input").disabled)) {
         temp = findNextFocusable(temp);
       }
       temp.querySelector("input:not([type='hidden'])").focus();
@@ -54,7 +60,7 @@ function MovePrevious(previousElement) {
     previousElement.querySelector("input:not([type='hidden'])").select();
   } else {
     var temp = previousElement.closest("tr").previousSibling.children[previousElement.closest("tr").previousSibling.children.length - 1];
-    while (temp.cellIndex !== 0 && (temp.querySelector("button:not([aria-label='Clear'])") || temp.querySelector("input").disabled)) {
+    while (temp.cellIndex !== 0 && (temp.querySelector("button:not([tabindex='-1'])") || temp.querySelector("input").disabled)) {
       temp = findPreviousFocusable(temp);
     }
     temp.querySelector("input:not([type='hidden'])").focus();
@@ -71,23 +77,28 @@ function MovePrevious(previousElement) {
  *
  * Salam Sosis
  */
-function KeyDownHandler(e, autoCompleteStates, fieldArray, focusRow, addRowFunction, langDirection) {
+function KeyDownHandler(e, addRowFunction, rtlEnabled, addRowAllowed) {
+  var rowIndex = e.target.closest('tr').rowIndex;
   var next = e.target.closest("td").nextSibling;
-  while (next.cellIndex !== next.closest("tr").children.length - 1 && (next.querySelector("button:not([aria-label='Clear'])") || next.querySelector("input").disabled)) {
+  while (next.cellIndex !== next.closest("tr").children.length - 1 && (next.querySelector("button:not([tabindex='-1'])") || next.querySelector("input:not([type='hidden'])").disabled)) {
     next = findNextFocusable(next);
   }
   var prev = e.target.closest("td").previousSibling;
-  while (prev.cellIndex !== 0 && (prev.querySelector("button:not([aria-label='Clear'])") || prev.querySelector("input").disabled)) {
+  while (prev.cellIndex !== 0 && (prev.querySelector("button:not([tabindex='-1'])") || prev.querySelector("input:not([type='hidden'])").disabled)) {
     prev = findPreviousFocusable(prev);
   }
-  if (e.keyCode === 40 && checkAllStatesFalse(autoCompleteStates)) {
+  var fieldArrayLength = e.target.closest("tbody").children.length;
+  if (e.keyCode === 40) {
     /* Down Arrowkey */
     e.preventDefault();
-    if (fieldArray.length === focusRow) {
+    if (fieldArrayLength === rowIndex) {
+      if (!addRowAllowed) {
+        return;
+      }
       addRowFunction();
       setTimeout(function () {
         var temp = next.closest("tr").nextSibling.children[e.target.closest("td").cellIndex];
-        while (temp.cellIndex !== temp.closest("tr").children.length - 1 && (temp.querySelector("button:not([aria-label='Clear'])") || temp.querySelector("input").disabled)) {
+        while (temp.cellIndex !== temp.closest("tr").children.length - 1 && (temp.querySelector("button:not([tabindex='-1'])") || temp.querySelector("input").disabled)) {
           temp = findNextFocusable(temp);
         }
         temp.querySelector("input").focus();
@@ -107,8 +118,11 @@ function KeyDownHandler(e, autoCompleteStates, fieldArray, focusRow, addRowFunct
       }
     }
   }
-  if (e.keyCode === 38 && checkAllStatesFalse(autoCompleteStates)) {
+  if (e.keyCode === 38) {
     /* Up ArrowKey */
+    if (rowIndex === 1) {
+      return;
+    }
     e.preventDefault();
     var up = e.target.closest("tr").previousSibling.children[e.target.closest("td").cellIndex].querySelector("input");
     up.focus();
@@ -121,35 +135,35 @@ function KeyDownHandler(e, autoCompleteStates, fieldArray, focusRow, addRowFunct
   }
   if (e.keyCode === 39) {
     /* Right ArrowKey */
-    langDirection === "rtl" ? MovePrevious(prev) : MoveNext(fieldArray, addRowFunction, next, focusRow);
+    rtlEnabled ? MovePrevious(prev) : MoveNext(fieldArrayLength, function () {
+      return addRowFunction();
+    }, next, rowIndex, addRowAllowed);
   }
   if (e.keyCode === 37) {
     /* Left ArrowKey */
-    langDirection === "ltr" ? MovePrevious(prev) : MoveNext(fieldArray, addRowFunction, next, focusRow);
+    !rtlEnabled ? MovePrevious(prev) : MoveNext(fieldArrayLength, function () {
+      return addRowFunction();
+    }, next, rowIndex, addRowAllowed);
   }
-  if (e.keyCode === 13 && checkAllStatesFalse(autoCompleteStates)) {
+  if (e.keyCode === 13) {
     /* Enter */
-    MoveNext(fieldArray, addRowFunction, next, focusRow);
-  } else if (e.keyCode === 13) {
-    /* Enter */
-    e.preventDefault();
-    MoveNext(fieldArray, addRowFunction, next, focusRow);
+    MoveNext(fieldArrayLength, function () {
+      return addRowFunction();
+    }, next, rowIndex, addRowAllowed);
   }
   if (e.keyCode === 9) {
     /* Tab */
     e.preventDefault();
     if (e.shiftKey === false) {
-      MoveNext(fieldArray, addRowFunction, next, focusRow);
+      MoveNext(fieldArrayLength, function () {
+        return addRowFunction();
+      }, next, rowIndex, addRowAllowed);
     } else {
       MovePrevious(prev);
     }
   }
 }
-var checkAllStatesFalse = function checkAllStatesFalse(states) {
-  return states.every(function (state) {
-    return state === false;
-  });
-};
 function IsNavigationKey(e) {
   return e.code === "ArrowDown" || e.code === "ArrowUp" || e.code === "ArrowLeft" || e.code === "ArrowRight" || e.code === "Tab" || e.code === "Enter";
 }
+var NavigationContext = exports.NavigationContext = /*#__PURE__*/(0, _react.createContext)(function (e) {});

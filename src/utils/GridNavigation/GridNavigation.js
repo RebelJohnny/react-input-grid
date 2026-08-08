@@ -1,20 +1,26 @@
+import { createContext } from "react"
+import { v4 as uuidv4 } from 'uuid';
+
 export function findNextFocusable(element) {
     return element.closest("td").nextSibling
 }
 export function findPreviousFocusable(element) {
     return element.closest("td").previousSibling
 }
-export function MoveNext(formikTable, rowBuilderFunc, nextElement, gridFocusRow) {
+export function MoveNext(fieldArrayLength, rowBuilderFunc, nextElement, gridFocusRow, addRowAllowed) {
     if (nextElement.cellIndex !== nextElement.closest("tr").children.length - 1) {
         nextElement.querySelector("input:not([type='hidden'])").focus()
         nextElement.querySelector("input:not([type='hidden'])").select()
     }
     else {
-        if (formikTable.length === gridFocusRow) {
+        if (fieldArrayLength === gridFocusRow) {
+            if (!addRowAllowed) {
+                return;
+            }
             rowBuilderFunc()
             setTimeout(() => {
                 let temp = nextElement.closest("tr").nextSibling.children[1]
-                while (temp.cellIndex !== temp.closest("tr").children.length - 1 && (temp.querySelector("button:not([aria-label='Clear'])") || temp.querySelector("input").disabled)) {
+                while (temp.cellIndex !== temp.closest("tr").children.length - 1 && (temp.querySelector("button:not([tabindex='-1'])") || temp.querySelector("input").disabled)) {
                     temp = findNextFocusable(temp)
                 }
                 temp.querySelector("input:not([type='hidden'])").focus()
@@ -24,7 +30,7 @@ export function MoveNext(formikTable, rowBuilderFunc, nextElement, gridFocusRow)
         }
         else {
             let temp = nextElement.closest("tr").nextSibling.children[1]
-            while (temp.cellIndex !== temp.closest("tr").children.length - 1 && (temp.querySelector("button:not([aria-label='Clear'])") || temp.querySelector("input").disabled)) {
+            while (temp.cellIndex !== temp.closest("tr").children.length - 1 && (temp.querySelector("button:not([tabindex='-1'])") || temp.querySelector("input").disabled)) {
                 temp = findNextFocusable(temp)
             }
             temp.querySelector("input:not([type='hidden'])").focus()
@@ -46,7 +52,7 @@ export function MovePrevious(previousElement) {
     }
     else {
         let temp = previousElement.closest("tr").previousSibling.children[previousElement.closest("tr").previousSibling.children.length - 1]
-        while (temp.cellIndex !== 0 && (temp.querySelector("button:not([aria-label='Clear'])") || temp.querySelector("input").disabled)) {
+        while (temp.cellIndex !== 0 && (temp.querySelector("button:not([tabindex='-1'])") || temp.querySelector("input").disabled)) {
             temp = findPreviousFocusable(temp)
         }
         temp.querySelector("input:not([type='hidden'])").focus()
@@ -64,24 +70,31 @@ export function MovePrevious(previousElement) {
  *
  * Salam Sosis
  */
-export function KeyDownHandler(e, autoCompleteStates, fieldArray, focusRow, addRowFunction, langDirection) {
+export function KeyDownHandler(e, addRowFunction, rtlEnabled, addRowAllowed) {
+    var rowIndex = e.target.closest('tr').rowIndex;
+
     let next = e.target.closest("td").nextSibling
-    while (next.cellIndex !== next.closest("tr").children.length - 1 && (next.querySelector("button:not([aria-label='Clear'])") || next.querySelector("input").disabled)) {
+    while (next.cellIndex !== next.closest("tr").children.length - 1 && (next.querySelector("button:not([tabindex='-1'])") || next.querySelector("input:not([type='hidden'])").disabled)) {
         next = findNextFocusable(next)
     }
 
     let prev = e.target.closest("td").previousSibling
-    while (prev.cellIndex !== 0 && (prev.querySelector("button:not([aria-label='Clear'])") || prev.querySelector("input").disabled)) {
+    while (prev.cellIndex !== 0 && (prev.querySelector("button:not([tabindex='-1'])") || prev.querySelector("input:not([type='hidden'])").disabled)) {
         prev = findPreviousFocusable(prev)
     }
 
-    if (e.keyCode === 40 && checkAllStatesFalse(autoCompleteStates)) { /* Down Arrowkey */
+    let fieldArrayLength = e.target.closest("tbody").children.length
+
+    if (e.keyCode === 40) { /* Down Arrowkey */
         e.preventDefault()
-        if (fieldArray.length === focusRow) {
+        if (fieldArrayLength === rowIndex) {
+            if (!addRowAllowed) {
+                return;
+            }
             addRowFunction()
             setTimeout(() => {
                 let temp = next.closest("tr").nextSibling.children[e.target.closest("td").cellIndex]
-                while (temp.cellIndex !== temp.closest("tr").children.length - 1 && (temp.querySelector("button:not([aria-label='Clear'])") || temp.querySelector("input").disabled)) {
+                while (temp.cellIndex !== temp.closest("tr").children.length - 1 && (temp.querySelector("button:not([tabindex='-1'])") || temp.querySelector("input").disabled)) {
                     temp = findNextFocusable(temp)
                 }
                 temp.querySelector("input").focus()
@@ -100,7 +113,10 @@ export function KeyDownHandler(e, autoCompleteStates, fieldArray, focusRow, addR
             }
         }
     }
-    if (e.keyCode === 38 && checkAllStatesFalse(autoCompleteStates)) { /* Up ArrowKey */
+    if (e.keyCode === 38) { /* Up ArrowKey */
+        if (rowIndex === 1) {
+            return;
+        }
         e.preventDefault()
         let up = e.target.closest("tr").previousSibling.children[e.target.closest("td").cellIndex].querySelector("input")
         up.focus()
@@ -114,31 +130,26 @@ export function KeyDownHandler(e, autoCompleteStates, fieldArray, focusRow, addR
     }
 
     if (e.keyCode === 39) { /* Right ArrowKey */
-        langDirection === "rtl" ? MovePrevious(prev) : MoveNext(fieldArray, addRowFunction, next, focusRow)
+        rtlEnabled ? MovePrevious(prev) : MoveNext(fieldArrayLength, () => addRowFunction(), next, rowIndex, addRowAllowed)
     }
     if (e.keyCode === 37) { /* Left ArrowKey */
-        langDirection === "ltr" ? MovePrevious(prev) : MoveNext(fieldArray, addRowFunction, next, focusRow)
+        !rtlEnabled ? MovePrevious(prev) : MoveNext(fieldArrayLength, () => addRowFunction(), next, rowIndex, addRowAllowed)
     }
-    if (e.keyCode === 13 && checkAllStatesFalse(autoCompleteStates)) { /* Enter */
-        MoveNext(fieldArray, addRowFunction, next, focusRow)
-    } else if (e.keyCode === 13) {    /* Enter */
-        e.preventDefault()
-        MoveNext(fieldArray, addRowFunction, next, focusRow)
+    if (e.keyCode === 13) { /* Enter */
+        MoveNext(fieldArrayLength, () => addRowFunction(), next, rowIndex, addRowAllowed)
     }
     if (e.keyCode === 9) { /* Tab */
         e.preventDefault()
         if (e.shiftKey === false) {
-            MoveNext(fieldArray, addRowFunction, next, focusRow)
+            MoveNext(fieldArrayLength, () => addRowFunction(), next, rowIndex, addRowAllowed)
         } else {
             MovePrevious(prev)
         }
     }
 }
 
-const checkAllStatesFalse = (states) => {
-    return states.every(state => state === false);
-}
-
 export function IsNavigationKey(e) {
     return e.code === "ArrowDown" || e.code === "ArrowUp" || e.code === "ArrowLeft" || e.code === "ArrowRight" || e.code === "Tab" || e.code === "Enter"
-} 
+}
+
+export const NavigationContext = createContext((e) => { })

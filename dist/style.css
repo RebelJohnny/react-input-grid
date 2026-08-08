@@ -128,6 +128,30 @@ table td.text-center input {
     text-align: center;
 }
 
+.with-insert-between-text-center {
+    text-align: center;
+}
+
+table td.with-insert-between-text-center input {
+    text-align: center;
+}
+
+table td.with-insert-between-text-center:hover {
+    color: transparent;
+}
+
+table td.with-insert-between-text-center:hover::before {
+    content: "+";
+    text-align: center;
+    width: 24px;
+    height: 24px;
+    color: #0d6efd;
+    position: absolute;
+    top: calc(50% - 12px);
+    left: calc(50% - 12px);
+    font-size: large;
+}
+
 .error-msg {
     display: block;
     color: red;
@@ -204,6 +228,14 @@ table td.text-center input {
     background: rgba(25, 118, 210, 0.12) !important;
 }
 
+.gridRow tr:focus {
+    background: rgba(25, 118, 210, 0.12) !important;
+}
+
+.gridRow tr:focus td {
+    background-color: inherit !important;
+}
+
 .gridRow.dark .focus-row-bg {
     background: rgb(25 118 210 / 53%) !important;
 }
@@ -241,4 +273,20 @@ table td.text-center input {
 .gridRow tfoot td {
     /*font-size: 13px;*/
     font-weight: bolder;
+}
+
+tr.warn-row {
+    background: #fff4cc !important;
+}
+
+tr.warn-row>td {
+    background: inherit !important;
+}
+
+tr.error-row {
+    background: #ffcccc !important;
+}
+
+tr.error-row>td {
+    background: inherit !important;
 }
